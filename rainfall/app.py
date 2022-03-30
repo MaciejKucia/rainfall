@@ -16,6 +16,7 @@ def health():
 def get_app(config: Optional[str] = None):
     app = Flask(__name__)
     app.logger.setLevel(logging.INFO)
+    app.logger.info("Rainfall Service started")
 
     if config is not None:
         app.logger.info("Loading config from %s", config)
