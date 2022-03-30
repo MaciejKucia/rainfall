@@ -24,3 +24,14 @@ curl -v http://localhost:8081/health
 poetry run gunicorn --workers 4 --bind 0.0.0.0:8081 rainfall.app:app
 curl -v http://localhost:8081/health
 ```
+
+## Build and run container
+
+```bash
+docker build . -t mkucia/rainfall:latest
+```
+
+```bash
+docker run -it -p8081:8081 mkucia/rainfall:latest
+curl -v http://localhost:8081/health
+```
