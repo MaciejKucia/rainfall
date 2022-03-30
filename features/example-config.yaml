@@ -1,0 +1,4 @@
+---
+rainfall-data-client:
+  URL: http://api.example
+  Location: Place
