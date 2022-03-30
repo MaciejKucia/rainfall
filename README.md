@@ -21,7 +21,9 @@ curl -v http://localhost:8081/health
 ## Run the production server
 
 ```bash
-poetry run gunicorn --workers 4 --bind 0.0.0.0:8081 rainfall.app:app
+poetry run gunicorn --workers 4 --bind 0.0.0.0:8081 \
+  --access-logfile - --access-logformat "{\"remote_ip\":\"%(h)s\",\"request_id\":\"%({X-Request-Id}i)s\",\"response_code\":\"%(s)s\",\"request_method\":\"%(m)s\",\"request_path\":\"%(U)s\",\"request_querystring\":\"%(q)s\",\"request_timetaken\":\"%(D)s\",\"response_length\":\"%(B)s\"}" \
+  rainfall.app:app
 curl -v http://localhost:8081/health
 ```
 
