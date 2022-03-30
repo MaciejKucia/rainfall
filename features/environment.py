@@ -1,10 +1,11 @@
 from behave import fixture, use_fixture
 
-from rainfall.app import app
+from rainfall.app import get_app
 
 
 @fixture
 def rainfall_client(context, *args, **kwargs):
+    app = get_app()
     app.testing = True
     app.config.update({
         "TESTING": True,

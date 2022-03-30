@@ -1,3 +1,5 @@
+from rainfall.app import get_app
+
 from behave import when, then, given
 
 
@@ -26,12 +28,12 @@ def step_impl(context):
     assert context.response.status_code == 200
 
 
-@given('config file is read')
-def step_conf_load(context):
-    raise NotImplementedError(u'STEP: Given config file is read')
+@given('"{config_path}" config file is read')
+def step_conf_load(context, config_path):
+    context.app = get_app(config_path)
 
 
 @then('configuration "{name}" is available for the application under "{value}"')
-def step_conf(context):
-    raise NotImplementedError(u'STEP: Then configuration "URL" is available '
-                              u'for the application under "http://api.example"')
+def step_conf(context, name, value):
+    print(context.app.config)
+    assert context.app.config['RDC_' + name.upper()] == value
