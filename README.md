@@ -37,3 +37,9 @@ docker build . -t mkucia/rainfall:latest
 docker run -it -p8080:8080 mkucia/rainfall:latest
 curl -v http://localhost:8080/health
 ```
+
+## Deployment
+
+```bash
+kubectl apply -f deployment/kubernetes.yaml
+```
