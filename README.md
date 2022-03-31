@@ -40,6 +40,28 @@ curl -v http://localhost:8080/health
 
 ## Deployment
 
+Install k3s and run registry
+
 ```bash
-kubectl apply -f deployment/kubernetes.yaml
+curl -sfL https://get.k3s.io | sh -s - --docker
+docker run -d -p 5000:5000 --restart=always --name registry registry:2
+```
+
+Upload image and run the deployment
+
+```bash
+docker tag mkucia/rainfall:latest localhost:5000/mkucia/rainfall:latest
+docker push localhost:5000/mkucia/rainfall:latest
+
+k3s kubectl apply -f deployment/kubernetes.yaml
+```
+
+Access the service
+
+```bash
+$ curl -v http://$(hostname)/; echo
+*   Trying 127.0.0.1:80...
+...
+* Connection #0 to host <hostname> left intact
+Marina Gardens Drive, 16:30, 0mm, Not Raining
 ```

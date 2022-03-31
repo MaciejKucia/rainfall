@@ -35,7 +35,7 @@ spec:
     spec:
       containers:
       - name: rainfall
-        image: mkucia/rainfall:latest
+        image: localhost:5000/mkucia/rainfall:latest
         ports:
         - containerPort: 8080
         volumeMounts:
@@ -71,8 +71,7 @@ metadata:
   namespace: rainfall
 spec:
   rules:
-  - host: domain.com
-    http:
+  - http:
       paths:
       - path: /
         pathType: Prefix
